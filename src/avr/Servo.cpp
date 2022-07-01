@@ -266,8 +266,8 @@ void Servo::write(int value)
   if(value < MIN_PULSE_WIDTH)
   {  // treat values less than 544 as angles in degrees (valid values in microseconds are handled as microseconds)
     if(value < 0) value = 0;
-    if(value > 180) value = 180;
-    value = map(value, 0, 180, SERVO_MIN(),  SERVO_MAX());
+    if(value > 360) value = 360;
+    value = map(value, 0, 360, SERVO_MIN(),  SERVO_MAX());
   }
   this->writeMicroseconds(value);
 }
@@ -295,7 +295,7 @@ void Servo::writeMicroseconds(int value)
 
 int Servo::read() // return the value as degrees
 {
-  return  map( this->readMicroseconds()+1, SERVO_MIN(), SERVO_MAX(), 0, 180);
+  return  map( this->readMicroseconds()+1, SERVO_MIN(), SERVO_MAX(), 0, 360);
 }
 
 int Servo::readMicroseconds()
